@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Iris Flower Classifier</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+            text-align: center;
+            padding-top: 60px;
+            overflow: hidden;
+        }
+
+        h2 {
+            color: #2b2d42;
+            font-size: 28px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        form {
+            background-color: #ffffff;
+            padding: 25px;
+            margin: 0 auto;
+            width: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: 600;
+            color: #333;
+            text-align: left;
+        }
+
+        input {
+            width: 92%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            transition: border 0.2s;
+        }
+
+        input:focus {
+            border-color: #2c7be5;
+            outline: none;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 22px;
+            background: linear-gradient(to right, #2c7be5, #5596f6);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #1a5dc9, #417de0);
+            transform: scale(1.05);
+        }
+
+        h3 {
+            margin-top: 35px;
+            color: #218838;
+            font-size: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ---------- Base Class ---------- */
+        .flower {
+            position: fixed;
+            font-size: 24px;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        /* Top to bottom */
+        @keyframes fall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .from-top {
+            top: -40px;
+            animation: fall 6s linear infinite;
+        }
+
+        /* Bottom to top */
+        @keyframes rise {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .from-bottom {
+            bottom: -40px;
+            animation: rise 7s linear infinite;
+        }
+
+        /* Left to right */
+        @keyframes leftRight {
+            0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateX(110vw) rotate(360deg); opacity: 0; }
+        }
+
+        .from-left {
+            left: -40px;
+            animation: leftRight 8s linear infinite;
+        }
+
+        /* Right to left */
+        @keyframes rightLeft {
+            0% { transform: translateX(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateX(-110vw) rotate(-360deg); opacity: 0; }
+        }
+
+        .from-right {
+            right: -40px;
+            animation: rightLeft 9s linear infinite;
+        }
+
+        /* Position & Delay Variety */
+        .flower:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .flower:nth-child(2) { left: 25%; animation-delay: 1s; }
+        .flower:nth-child(3) { left: 40%; animation-delay: 0.5s; }
+        .flower:nth-child(4) { left: 55%; animation-delay: 1.5s; }
+        .flower:nth-child(5) { left: 70%; animation-delay: 0.8s; }
+        .flower:nth-child(6) { left: 85%; animation-delay: 1.2s; }
+        .flower:nth-child(7) { top: 20%; animation-delay: 0.7s; }
+        .flower:nth-child(8) { top: 40%; animation-delay: 1.4s; }
+        .flower:nth-child(9) { top: 60%; animation-delay: 2s; }
+        .flower:nth-child(10) { top: 80%; animation-delay: 2.5s; }
+    </style>
+</head>
+<body>
+    <h2>Iris Flower Predictor</h2>
+    <form method="POST">
+        <label>Sepal Length:</label>
+        <input name="sepal_length" required>
+
+        <label>Sepal Width:</label>
+        <input name="sepal_width" required>
+
+        <label>Petal Length:</label>
+        <input name="petal_length" required>
+
+        <label>Petal Width:</label>
+        <input name="petal_width" required>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+        <h3>Predicted Flower: {{ prediction }}</h3>
+    {% endif %}
+
+    <!-- 🌸 From All Directions -->
+    <div class="flower from-top">🌸</div>
+    <div class="flower from-top">🌸</div>
+    <div class="flower from-top">🌸</div>
+    <div class="flower from-bottom">🌸</div>
+    <div class="flower from-bottom">🌸</div>
+    <div class="flower from-left">🌸</div>
+    <div class="flower from-left">🌸</div>
+    <div class="flower from-right">🌸</div>
+    <div class="flower from-right">🌸</div>
+</body>
+</html>
